@@ -1,4 +1,4 @@
-﻿using EntityFramework.Triggers;
+﻿using EntityFrameworkCore.Triggers;
 using Microsoft.EntityFrameworkCore;
 using sample.dal.Models;
 using System;
@@ -12,23 +12,21 @@ namespace sample.dal
     public class SampleAppContext : DbContext
     {
         
-        private const string _dbConnection = "";
+        private const string _dbConnection = @"Data Source=LEN-E560-051\CGLOCALHOST;Initial Catalog=customer.ef;Persist Security Info=True;User ID=sa;Password=Database@123";
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
 
             optionsBuilder.UseSqlServer(_dbConnection);
             base.OnConfiguring(optionsBuilder);
         }
-
-        public override Int32 SaveChanges(Boolean acceptAllChangesOnSuccess)
+        protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
-            return this.SaveChangesWithTriggers(base.SaveChanges, acceptAllChangesOnSuccess);
+            base.OnModelCreating(modelBuilder);
         }
-
-        public override Task<Int32> SaveChangesAsync(CancellationToken cancellationToken = default(CancellationToken))
-        {
-            return this.SaveChangesWithTriggersAsync(base.SaveChangesAsync, acceptAllChangesOnSuccess: true, cancellationToken: cancellationToken);
-        }
+        //public override Task<Int32> SaveChangesAsync(CancellationToken cancellationToken = default(CancellationToken))
+        //{
+        //    return this.SaveChangesWithTriggersAsync(base.SaveChangesAsync, acceptAllChangesOnSuccess: true, cancellationToken: cancellationToken);
+        //}
         public DbSet<Customer> Customers { get; set; }
         public DbSet<Notification> Notifications { get; set; }
     }

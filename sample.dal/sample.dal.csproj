@@ -5,7 +5,7 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <PackageReference Include="EntityFramework.Triggers" Version="6.1.0" />
+    <PackageReference Include="EntityFrameworkCore.Triggers" Version="1.1.1" />
     <PackageReference Include="Microsoft.EntityFrameworkCore.SqlServer" Version="2.1.0" />
   </ItemGroup>
 

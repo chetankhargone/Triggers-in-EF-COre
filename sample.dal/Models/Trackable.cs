@@ -1,4 +1,4 @@
-﻿using EntityFramework.Triggers;
+﻿using EntityFrameworkCore.Triggers;
 using System;
 using System.Collections.Generic;
 using System.Text;
@@ -16,4 +16,20 @@ namespace sample.dal.Models
             Triggers<Trackable>.Updated += entry => entry.Entity.Updated = DateTime.UtcNow;
         }
     }
+
+    public abstract class SoftDeletable : Trackable
+    {
+        public virtual DateTime? Deleted { get; private set; }
+        public Boolean IsSoftDeleted => Deleted != null;
+        public void SoftDelete() => Deleted = DateTime.UtcNow;
+
+        static SoftDeletable()
+        {
+            Triggers<SoftDeletable>.Deleting += entry =>
+            {
+                entry.Entity.SoftDelete();
+            };
+        }
+    }
+
 }
