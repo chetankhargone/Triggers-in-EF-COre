@@ -12,7 +12,7 @@ namespace sample.dal
     public class SampleAppContext : DbContext
     {
         
-        private const string _dbConnection = @"Data Source=LEN-E560-051\CGLOCALHOST;Initial Catalog=customer.ef;Persist Security Info=True;User ID=sa;Password=Database@123";
+        private const string _dbConnection = @"Data Source=LEN-E560-051\CGLOCALHOST;Initial Catalog=customer.ef;Persist Security Info=True;User ID=sa;Password=******";
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
 
